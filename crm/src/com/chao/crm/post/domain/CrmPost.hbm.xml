@@ -19,4 +19,4 @@
 			<one-to-many class="com.chao.crm.staff.domain.CrmStaff"/>
 		</set>
 	</class>
-</hibernate-mapping> 
+</hibernate-mapping>
