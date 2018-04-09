@@ -1,5 +1,7 @@
 package com.chao.crm.staff.service.impl;
 
+import java.util.List;
+
 import com.chao.crm.staff.dao.StaffDao;
 import com.chao.crm.staff.domain.CrmStaff;
 import com.chao.crm.staff.service.StaffService;
@@ -17,6 +19,16 @@ public class StaffServiceImpl implements StaffService {
 		// MD5º”√‹ √‹¬Î
 		String logginPwd = MyStringUtils.getMD5Value(staff.getLoginPwd());
 		return staffDao.find(staff.getLoginName(), logginPwd);
+	}
+	
+	@Override
+	public List<CrmStaff> findAllStaff() {
+		return this.staffDao.findAll();
+	}
+	
+	@Override
+	public CrmStaff findById(String staffId) {
+		return this.staffDao.findById(staffId);
 	}
 
 }

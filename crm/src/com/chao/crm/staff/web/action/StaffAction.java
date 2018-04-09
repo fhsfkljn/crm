@@ -1,5 +1,8 @@
 package com.chao.crm.staff.web.action;
 
+import java.util.List;
+
+import com.chao.crm.department.domain.CrmDepartment;
 import com.chao.crm.staff.domain.CrmStaff;
 import com.chao.crm.staff.service.StaffService;
 import com.opensymphony.xwork2.ActionContext;
@@ -17,11 +20,14 @@ public class StaffAction extends ActionSupport implements ModelDriven<CrmStaff> 
 	}
 
 	// 默认按照名称注入
+	// 员工
 	private StaffService staffService;
 
 	public void setStaffService(StaffService staffService) {
 		this.staffService = staffService;
 	}
+
+
 
 	// ----------------------------------------------
 
@@ -46,13 +52,49 @@ public class StaffAction extends ActionSupport implements ModelDriven<CrmStaff> 
 		// * 请求转发显示
 		return "login";
 	}
-	
+
 	/**
 	 * 显示首页
+	 * 
 	 * @return
 	 */
-	public String home(){
+	public String home() {
 		return "home";
 	}
 
+	/**
+	 * 查询所有
+	 * 
+	 * @return
+	 */
+	public String findAll() {
+		// 1查询所有
+		List<CrmStaff> allStaff = staffService.findAllStaff();
+		// 2 将结果存放到值栈，方便jsp获得数据
+		// * 方式1：context (map)存放 put(key ,value) ，jsp页面获得 “#key” 。
+		// ActionContext.getContext().put(key, value)
+		// * 方式2：root (值栈) ，push(obj) ，一般数据为JavaBean 或 Map ，jsp页面获得“属性名” 或“key”
+		// 。
+		// ActionContext.getContext().getValueStack().push(o)
+		// * 方式3：root (值栈) ，set(key ,value) ,一般数据为List ，jsp页面获得“key”
+		// set() 底层 new Map(key,value) ，将 push(map )
+
+		// 使用 context存放数据
+		ActionContext.getContext().put("allStaff", allStaff);
+
+		return "findAll";
+	}
+
+	/**
+	 * 编辑前操作
+	 * @return
+	 */
+	public String editUI(){
+		//1 通过id查询员工
+		CrmStaff findStaff = this.staffService.findById(staff.getStaffId());
+		ActionContext.getContext().getValueStack().push(findStaff);
+
+		return "editUI";
+
+	}
 }

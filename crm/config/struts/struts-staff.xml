@@ -13,6 +13,10 @@
 			-->
 			<!-- 3 首页 -->
 			<result name="home">/WEB-INF/pages/frame.jsp</result>
+			<!-- 4 查询所有 -->
+			<result name="findAll">/WEB-INF/pages/staff/listStaff.jsp</result>
+			<!-- 5 编辑前，显示jsp页面 -->
+			<result name="editUI">/WEB-INF/pages/staff/editStaff.jsp</result>
 		</action>
 	</package>
 </struts>
