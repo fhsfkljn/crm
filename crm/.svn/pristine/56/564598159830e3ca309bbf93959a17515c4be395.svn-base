@@ -54,21 +54,21 @@
 	 <tr>
 	    <td width="10%">所属部门：</td>
 	    <td width="20%">
-			<s:select list="allDepartment" name="post.department.depId" onchange="showPost(this)"
+	    	
+			<s:select list="allDepartment" name="post.department.depId" onchange="changePost(this)"
 				listKey="depId" listValue="depName"
-				headerKey="" headerValue="----请--选--择----"
-			>
+				headerKey="" headerValue="----请--选--择----" id="postSelectId">
 			</s:select>
 
 	    </td>
 	    <td width="8%">职务：</td>
 	    <td width="62%">
-			<s:select list="post != null ? post.department.postSet : {}" name="post.postId"
+	    	
+			<s:select list="post != null ? post.department.postSet : {}" name="post.postId" onchange="changePost(this)"
 				listKey="postId" listValue="postName"
-				headerKey="" headerValue="----请--选--择----"  id="postSelectId"
-			>
-			</s:select>
+				headerKey="" headerValue="----请--选--择----" id="postSelectId">
 			
+			</s:select>
 	    </td>
 	  </tr>
 	  <tr>
@@ -83,52 +83,6 @@
 	</table>
 	
 </s:form>
-
-	<script type="text/javascript">
-		function showPost(obj){
-			var depId = obj.value;
-			//alert(1);
-			//2 发送ajax，通过部门查询职务
-			//2.1 获得引擎
-			var xmlhttp=null;
-			if (window.XMLHttpRequest){// code for all new browsers
-			  xmlhttp=new XMLHttpRequest();
-			} else if (window.ActiveXObject) {// code for IE5 and IE6
-			  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-			}
-			//2.2 设置回调函数
-			xmlhttp.onreadystatechange = function(){
-				//请求完成，正常响应
-				if(xmlhttp.readyState==4 && xmlhttp.status==200){
-					var textData = xmlhttp.responseText;
-					//alert(textData);
-					//3.1 将字符串 手动 转换 json对象
-					var jsonData = eval("("+textData+")");
-					//alert(jsonData);
-					// 获得select对象
-					var postSelectElement = document.getElementById("postSelectId");
-					postSelectElement.innerHTML = "<option value=''>----请--选--择----</option>";
-					//3.2 遍历
-					for(var i = 0 ; i < jsonData.length ; i++){
-						var postObj = jsonData[i];
-						// 获得职务id
-						var postId = postObj.postId;
-						// 获得职务名称
-						var postName = postObj.postName;
-						
-						//3.3 将数显示到select标签
-						postSelectElement.innerHTML += "<option value='"+postId+"'>"+postName+"</option>";
-					}
-				}
-				
-			};
-			//2.3 创建连接
-			var url = "${pageContext.request.contextPath}/postAction_findAllWithDepartment?department.depId=" + depId;
-			xmlhttp.open("GET", url);
-			//2.4 发送请求
-			xmlhttp.send(null);
-		}
-	</script>
 
 </body>
 </html>
