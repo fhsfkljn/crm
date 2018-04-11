@@ -25,5 +25,11 @@ public interface StaffService {
 	 * @return
 	 */
 	public CrmStaff findById(String staffId);
+	
+	/**
+	 * 更新员工
+	 * @param staff
+	 */
+	public void updateStaff(CrmStaff staff);
 
 }

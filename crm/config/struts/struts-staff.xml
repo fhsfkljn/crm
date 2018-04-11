@@ -17,6 +17,16 @@
 			<result name="findAll">/WEB-INF/pages/staff/listStaff.jsp</result>
 			<!-- 5 编辑前，显示jsp页面 -->
 			<result name="editUI">/WEB-INF/pages/staff/editStaff.jsp</result>
+			<!-- 6 编辑成功 
+				* 重定向可以注入详细配置
+				* 默认使用
+					<result name="success" type="redirectAction">staffAction_home</result>
+					给actionName进行注入
+			-->
+			<result name="edit" type="redirectAction">
+				<param name="namespace">/</param>
+				<param name="actionName">staffAction_findAll</param>
+			</result>
 		</action>
 	</package>
 </struts>

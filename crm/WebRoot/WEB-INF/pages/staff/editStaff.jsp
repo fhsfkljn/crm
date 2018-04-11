@@ -34,7 +34,9 @@
   </tr>
 </table>
 
-<s:form>
+<s:form namespace="/" action="staffAction_edit">
+	<%--隐藏域，存放用户id --%>
+	<s:hidden name="staffId" value="%{staffId}"></s:hidden>
 
 	<table width="88%" border="0" class="emp_table" style="width:80%;">
 	 <tr>
