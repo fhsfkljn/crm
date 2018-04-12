@@ -1,0 +1,36 @@
+package com.chao.crm.coursetype.service;
+
+import java.util.List;
+
+import com.chao.crm.coursetype.domain.CrmCourseType;
+
+public interface CourseTypeService {
+
+	/**
+	 * 查询所有
+	 * 
+	 * @return
+	 */
+	public List<CrmCourseType> findAll();
+	
+	/**
+	 * 带有条件的查询所有
+	 * @param courseType
+	 * @return
+	 */
+	public List<CrmCourseType> findAll(CrmCourseType courseType);
+	
+	/**
+	 * 通过id查询详情
+	 * @param courseTypeId
+	 * @return
+	 */
+	public CrmCourseType findById(String courseTypeId);
+	
+	/**
+	 * 保存或更新
+	 * @param courseType
+	 */
+	public void addOrEdit(CrmCourseType courseType);
+
+}

@@ -73,5 +73,7 @@
 	<import resource="applicationContext-department.xml"/>
 	<!-- 4.3 职务 -->
 	<import resource="applicationContext-post.xml"/>
+	<!-- 4.4课程类别 -->
+	<import resource="applicationContext-coursetype.xml"/>
 	
 </beans>
