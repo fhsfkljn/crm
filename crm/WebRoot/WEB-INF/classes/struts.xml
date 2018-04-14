@@ -47,6 +47,11 @@
 		</interceptors>
 		<!-- @3)声明默认 -->
 		<default-interceptor-ref name="loginStack"></default-interceptor-ref>
+		
+		<!-- 默认action，及如果找不到action，将执行的action 
+		<default-action-ref name="uiAction_frame_top" ></default-action-ref>
+		-->
+		
 		<!-- @4)全局结果集 -->
 		<global-results>
 			<result name="login">/WEB-INF/pages/login.jsp</result>
