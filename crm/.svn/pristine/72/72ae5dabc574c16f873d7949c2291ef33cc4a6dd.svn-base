@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<!-- 员工配置 -->
+	<package name="classes" namespace="/" extends="common">
+		<action name="classesAction_*" class="com.chao.crm.classes.web.action.ClassesAction" method="{1}">
+			<!-- 1 查询所有 -->
+			<result name="findAll">/WEB-INF/pages/classes/listClass.jsp</result>
+			<!-- 2 上传表单页面 -->
+			<result name="uploadUI">/WEB-INF/pages/classes/uploadClass.jsp</result>
+			<!-- 3 上传成功 -->
+			<result name="upload" type="redirectAction">classesAction_findAll</result>
+			<!-- 4 上传不成功 -->
+			<result name="uploadInput">/WEB-INF/pages/error.jsp</result>
+			<!-- 5 下载 -->
+			<result name="downloadSuccess" type="stream">
+				<!-- 给stream的结果类型注入参数：Content-Type -->
+				<param name="contentType">application/octet-stream</param>
+				<!-- 告知客户浏览器以下载的方式打开
+				<param name="contentDisposition">attachment;filename=photo.jpg</param> -->
+				<!-- 使用OGNL表达式，来动态获取文件名 
+					 ${@java.net.URLEncoder@encode(filename,"UTF-8")} 把${}中间的内容当成一个OGNL表达式来看待
+				-->
+				<param name="contentDisposition">attachment;filename=${filename}</param>
+				<!-- 注入字节输入流 :取值要写动作类中set方法的名称，首字母改成小写-->
+				<param name="inputName">inputStream</param>
+			</result>
+		</action>
+	</package>
+	
+	
+</struts>

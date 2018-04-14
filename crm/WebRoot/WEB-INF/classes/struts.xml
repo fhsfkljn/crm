@@ -36,7 +36,12 @@
 			<interceptor name="loginInterceptor" class="com.chao.crm.web.interceptor.LoginInterceptor"></interceptor>
 			<!-- @2)自定义拦截器栈 -->
 			<interceptor-stack name="loginStack">
-				<interceptor-ref name="defaultStack"></interceptor-ref>
+				<!-- 给拦截器栈中的某一个拦截器注入内容时，
+					格式：拦截器.属性 = 值
+				-->
+				<interceptor-ref name="defaultStack">
+					<param name="fileUpload.allowedExtensions">.xls,.xlsx,.png,.jpg</param>
+				</interceptor-ref>
 				<!-- 自定义拦截需要进行login不进行拦截
 					* excludeMethods 配置不包含的方法，多个方法使用逗号分隔
 				-->
@@ -95,4 +100,5 @@
 	<include file="struts/struts-staff.xml"></include>
 	<include file="struts/struts-post.xml"></include>
 	<include file="struts/struts-coursetype.xml"></include>
+	<include file="struts/struts-classes.xml"></include>
 </struts>
